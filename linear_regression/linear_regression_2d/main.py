@@ -17,11 +17,11 @@ def main():
     
     x_train = np.mat(x_arr)
     y_train = np.mat(y_arr)
-    
+  
     model = lgm()
 
     # Training: adjust the model so that its loss is minimized
-    minimize_operation = tf.train.GradientDescentOptimizer(0.01).minimize(model.loss)
+    minimize_operation = tf.train.GradientDescentOptimizer(0.00001).minimize(model.loss)
 
     # Create session object for running TensorFlow operations
     session = tf.Session()
