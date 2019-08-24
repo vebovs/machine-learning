@@ -21,7 +21,7 @@ def main():
   
     model = lgm()
 
-    learning_rate = 0.00001
+    learning_rate = 0.0001
 
     minimize_operation = tf.train.GradientDescentOptimizer(learning_rate).minimize(model.loss)
 
@@ -29,7 +29,7 @@ def main():
 
     session.run(tf.global_variables_initializer())
 
-    for epoch in range(10000):
+    for epoch in range(1000):
         session.run(minimize_operation, {model.x: x_train, model.y: y_train})
 
     W, b, loss = session.run([model.W, model.b, model.loss], {model.x: x_train, model.y: y_train})

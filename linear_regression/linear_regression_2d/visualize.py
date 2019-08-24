@@ -27,5 +27,6 @@ class visualize:
         print('loss: ', self.loss(x_train, y_train))
 
         ax.legend()
+        plt.title('linear_regression_2d')
         plt.show()
 
