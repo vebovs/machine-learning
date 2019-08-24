@@ -2,6 +2,7 @@ import csv
 from LinearRegressionModel import LinearRegressionModel as lgm
 import numpy as np
 import tensorflow as tf
+from visualize import visualize as vis
 
 def main():
     x_arr = []
@@ -20,8 +21,10 @@ def main():
   
     model = lgm()
 
+    learning_rate = 0.00001
+
     # Training: adjust the model so that its loss is minimized
-    minimize_operation = tf.train.GradientDescentOptimizer(0.00001).minimize(model.loss)
+    minimize_operation = tf.train.GradientDescentOptimizer(learning_rate).minimize(model.loss)
 
     # Create session object for running TensorFlow operations
     session = tf.Session()
@@ -29,7 +32,7 @@ def main():
     # Initialize tf.Variable objects
     session.run(tf.global_variables_initializer())
 
-    for epoch in range(1000):
+    for epoch in range(10000):
         session.run(minimize_operation, {model.x: x_train, model.y: y_train})
 
     # Evaluate training accuracy
@@ -37,6 +40,10 @@ def main():
     print("W = %s, b = %s, loss = %s" % (W, b, loss))
 
     session.close()
+
+    graph = vis(W, b)
+    x_plot = np.mat([[np.min(x_train)], [np.max(x_train)]])
+    graph.plot(x_plot, x_train, y_train, 'length', 'weight')
 
 
 if __name__ == "__main__":
