@@ -1,6 +1,6 @@
 import csv
-from LinearRegressionModel import LinearRegressionModel as lgm
 import numpy as np
+from LinearRegressionModel import LinearRegressionModel as lgm
 import tensorflow as tf
 from visualize import visualize as vis
 
