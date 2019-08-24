@@ -23,19 +23,15 @@ def main():
 
     learning_rate = 0.00001
 
-    # Training: adjust the model so that its loss is minimized
     minimize_operation = tf.train.GradientDescentOptimizer(learning_rate).minimize(model.loss)
 
-    # Create session object for running TensorFlow operations
     session = tf.Session()
 
-    # Initialize tf.Variable objects
     session.run(tf.global_variables_initializer())
 
     for epoch in range(10000):
         session.run(minimize_operation, {model.x: x_train, model.y: y_train})
 
-    # Evaluate training accuracy
     W, b, loss = session.run([model.W, model.b, model.loss], {model.x: x_train, model.y: y_train})
     print("W = %s, b = %s, loss = %s" % (W, b, loss))
 
