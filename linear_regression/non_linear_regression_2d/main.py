@@ -38,7 +38,7 @@ def main():
     session.close()
 
     graph = vis(W, b)
-    x_plot = np.mat([[np.min(x_train)], [np.max(x_train)]])
+    x_plot = np.sort(x_arr, axis = 0)
     graph.plot(x_plot, x_train, y_train, 'day', 'head_circumference')
 
 if __name__ == "__main__":

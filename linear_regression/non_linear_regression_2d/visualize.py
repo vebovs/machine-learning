@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import math
 
 fig, ax = plt.subplots()
 
@@ -10,7 +9,17 @@ class visualize:
         self.b = b
 
     def f(self, x):
-        return 20 * (x * self.W + self.b) + 31
+        return 20 * np.multiply(self.sigma(x), (np.multiply(x, self.W) + self.b)) + 31
+
+    def sigma(self, x):
+        arr = np.arange(-5, 5, 0.01)
+        matrix = []
+        for x in arr:
+            matrix.append([float(x)])
+        mat = np.mat(matrix)
+        p = np.divide(1, 1 + np.exp(-mat))
+        #ax.plot(mat, p)
+        return np.divide(1, 1 + np.exp(-x))
     
     def loss(self, x, y):
         return np.mean(np.square(self.f(x) - y))
@@ -23,9 +32,10 @@ class visualize:
 
     def plot(self, x, x_train, y_train, xlab, ylab):
         self.scatterplot(x_train, y_train, xlab, ylab)
+
         ax.plot(x, self.f(x), label = '$y = f(x) = 20\u03C3(xW + b) + 31$')
         
-        print('loss: ', self.loss(x_train, y_train))
+        print('loss: ', self.loss(x, y_train))
 
         ax.legend()
         plt.title('non_linear_regression_2d')
