@@ -2,6 +2,7 @@ import csv
 import numpy as np
 from LinearRegressionModel import LinearRegressionModel as lgm
 import tensorflow as tf
+from visualize import visualize as vis
 
 def main():
     x_arr = []
@@ -24,7 +25,7 @@ def main():
 
     model = lgm()
 
-    learning_rate = 0.000001
+    learning_rate = 0.0000001
 
     minimize_operation = tf.train.GradientDescentOptimizer(learning_rate).minimize(model.loss)
 
@@ -39,6 +40,9 @@ def main():
     print("W = %s, M = %s, b = %s, loss = %s" % (W, M, b, loss))
 
     session.close()
+
+    graph = vis(W, M ,b)
+    graph.plot(x_arr, y_arr, z_arr, x_train, y_train)
 
 if __name__ == "__main__":
     main()

@@ -9,7 +9,8 @@ class visualize:
         self.b = b
 
     def f(self, x):
-        return 20 * np.multiply(self.sigma(x), (np.multiply(x, self.W) + self.b)) + 31
+        #return 20 * np.multiply(self.sigma(x), (np.multiply(x, self.W) + self.b)) + 31
+        return 3 * np.log(self.W * x) + self.b + 52
 
     def sigma(self, x):
         arr = np.arange(-5, 5, 0.01)
