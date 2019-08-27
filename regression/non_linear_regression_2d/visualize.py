@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 fig, ax = plt.subplots()
 
@@ -9,18 +10,10 @@ class visualize:
         self.b = b
 
     def f(self, x):
-        #return 20 * np.multiply(self.sigma(x), (np.multiply(x, self.W) + self.b)) + 31
-        return 3 * np.log(self.W * x) + self.b + 52
+        return 20 * self.sigma(x * self.W + self.b) + 31
 
     def sigma(self, x):
-        arr = np.arange(-5, 5, 0.01)
-        matrix = []
-        for x in arr:
-            matrix.append([float(x)])
-        mat = np.mat(matrix)
-        p = np.divide(1, 1 + np.exp(-mat))
-        #ax.plot(mat, p)
-        return np.divide(1, 1 + np.exp(-x))
+        return np.divide(1 , 1 + np.exp(-x))
     
     def loss(self, x, y):
         return np.mean(np.square(self.f(x) - y))

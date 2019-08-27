@@ -42,7 +42,7 @@ def main():
     session.close()
 
     graph = vis(W, M ,b)
-    graph.plot(x_arr, y_arr, z_arr, x_train, y_train)
+    graph.plot(x_arr, y_arr, z_arr, x_train, y_train, z_train)
 
 if __name__ == "__main__":
     main()

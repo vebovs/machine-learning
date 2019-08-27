@@ -35,7 +35,7 @@ class visualize:
         ax.scatter(x, y, z)
         ax.legend()
 
-    def plot(self, x_arr, y_arr, z_arr, x_train, y_train):
+    def plot(self, x_arr, y_arr, z_arr, x_train, y_train, z_train):
         self.scatterplot(x_arr, y_arr, z_arr)
 
         x = []
@@ -55,9 +55,9 @@ class visualize:
         x.sort()
         y.sort()
         z.sort()
-        ax.plot(x, y, z)
+        ax.plot([min(x), max(x)], [min(y), max(y)], [min(z), max(z)])
         
-        #print('loss: ', self.loss(x_train, y_train))
+        print('loss: ', self.loss(x_train, y_train, z_train))
 
         ax.legend()
         plt.title('linear_regression_3d')
