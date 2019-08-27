@@ -8,7 +8,7 @@ def main():
     x_arr = []
     y_arr = []
     z_arr = []
-    with open('/home/vebovs/Desktop/machine-learning/linear_regression/linear_regression_3d/day_length_weight.csv') as csvfile:
+    with open('/home/vebovs/Desktop/machine-learning/regression/linear_regression_3d/day_length_weight.csv') as csvfile:
         readCSV = csv.reader(csvfile, delimiter = ',')
         for row in readCSV:
             x = [float(row[2])]

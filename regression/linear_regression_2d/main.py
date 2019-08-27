@@ -7,7 +7,7 @@ from visualize import visualize as vis
 def main():
     x_arr = []
     y_arr = []
-    with open('/home/vebovs/Desktop/machine-learning/linear_regression/linear_regression_2d/length_weight.csv') as csvfile:
+    with open('/home/vebovs/Desktop/machine-learning/regression/linear_regression_2d/length_weight.csv') as csvfile:
         readCSV = csv.reader(csvfile, delimiter = ',')
         for row in readCSV:
             x = [float(row[0])]
