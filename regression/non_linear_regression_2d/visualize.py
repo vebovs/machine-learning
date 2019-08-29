@@ -24,14 +24,14 @@ class visualize:
         ax.set_ylabel(ylab)
 
 
-    def plot(self, x, x_train, y_train, xlab, ylab):
+    def plot(self, x_arr, x_train, y_train, xlab, ylab, title = 'non_linear_regression_2d'):
         self.scatterplot(x_train, y_train, xlab, ylab)
-
-        ax.plot(x, self.f(x), label = '$y = f(x) = 20\u03C3(xW + b) + 31$')
+        x_plot = np.sort(x_arr, axis = 0)
+        ax.plot(x_plot, self.f(x_plot), label = '$y = f(x) = 20\u03C3(xW + b) + 31$')
         
-        print('loss: ', self.loss(x, y_train))
+        print('loss: ', self.loss(x_arr, y_train))
 
         ax.legend()
-        plt.title('non_linear_regression_2d')
+        plt.title(title)
         plt.show()
 

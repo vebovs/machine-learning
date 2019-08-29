@@ -16,8 +16,8 @@ class visualize:
     
     def loss(self, x, y, z):
         return np.mean(np.square(self.f(x, y) - z))
-    
-    def scatterplot(self, x_arr, y_arr, z_arr):
+
+    def unpack(self, x_arr, y_arr, z_arr):
         x = []
         y = []
         z = []
@@ -31,35 +31,26 @@ class visualize:
             for col in row:
                 z.append(col)
 
-        #ax.plot(x_train, y_train, 'o', label = '$(\\hat x^{(i)},\\hat y^{(i)})$')
-        ax.scatter(x, y, z)
-        ax.legend()
+        return x, y, z
+    
+    def scatterplot(self, x_arr, y_arr, z_arr, xlab, ylab, zlab):
+        points = self.unpack(x_arr, y_arr, z_arr)
+        ax.scatter(points[0] ,points[1], points[2])
+        ax.set_xlabel(xlab)
+        ax.set_ylabel(ylab)
+        ax.set_zlabel(zlab)
 
-    def plot(self, x_arr, y_arr, z_arr, x_train, y_train, z_train):
-        self.scatterplot(x_arr, y_arr, z_arr)
-
-        x = []
-        y = []
-        z = []
-        res = self.f(x_train, y_train)
-        for row in x_arr:
-            for col in row:
-                x.append(col)
-        for row in y_arr:
-            for col in row:
-                y.append(col)
-        for row in res.tolist():
-            for col in row:
-                z.append(col)
-
-        x.sort()
-        y.sort()
-        z.sort()
-        ax.plot([min(x), max(x)], [min(y), max(y)], [min(z), max(z)])
+    def plot(self, x_arr, y_arr, z_arr, x_train, y_train, z_train, xlab, ylab, zlab, title = 'linear_regression_3d'):
+        self.scatterplot(x_arr, y_arr, z_arr, xlab, ylab, zlab)
+        points = self.unpack(x_arr, y_arr, z_arr)
+        points[0].sort()
+        points[1].sort()
+        points[2].sort()
+        ax.plot([min(points[0]), max(points[0])], [min(points[1]), max(points[1])], [min(points[2]), max(points[2])])
         
         print('loss: ', self.loss(x_train, y_train, z_train))
 
         ax.legend()
-        plt.title('linear_regression_3d')
+        plt.title(title)
         plt.show()
 

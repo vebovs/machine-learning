@@ -38,8 +38,7 @@ def main():
     session.close()
 
     graph = vis(W, b)
-    x_plot = np.mat([[np.min(x_train)], [np.max(x_train)]])
-    graph.plot(x_plot, x_train, y_train, 'length', 'weight')
+    graph.plot(x_train, y_train, 'length', 'weight')
 
 
 if __name__ == "__main__":

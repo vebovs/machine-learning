@@ -38,8 +38,7 @@ def main():
     session.close()
 
     graph = vis(W, b)
-    x_plot = np.sort(x_arr, axis = 0)
-    graph.plot(x_plot, x_train, y_train, 'day', 'head_circumference')
+    graph.plot(x_arr, x_train, y_train, 'day', 'head circumference')
 
 if __name__ == "__main__":
     main()
