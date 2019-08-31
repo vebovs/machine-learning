@@ -25,7 +25,7 @@ classifier = learn.LinearClassifier(feature_columns=feature_columns, n_classes=1
 classifier.fit(data, labels, batch_size=100, steps=1000)
 
 classifier.evaluate(test_data, test_labels)
-print("Accuracy: ", classifier.evaluate(test_data, test_labels)["accuracy"])
+print("Accuracy: ", classifier.evaluate(test_data, test_labels)["accuracy"]*100, "%")
 
 name = classifier.get_variable_names()[1]
 
