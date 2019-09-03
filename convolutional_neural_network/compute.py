@@ -30,7 +30,7 @@ class ConvolutionalNeuralNetworkModel:
         #dropped = tf.nn.dropout(pool2, 0.2)
         #relu = tf.nn.relu(pool2)
 
-        dense = tf.layers.dense(tf.layers.flatten(relu), units=1024)
+        dense = tf.layers.dense(tf.layers.flatten(pool2), units=1024)
 
         # Logits
         logits = tf.layers.dense(dense, units=10)
