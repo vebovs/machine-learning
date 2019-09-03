@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-(x_train_, y_train_), (x_test_, y_test_) = tf.keras.datasets.mnist.load_data()
+(x_train_, y_train_), (x_test_, y_test_) = tf.keras.datasets.fashion_mnist.load_data()
 x_train = np.reshape(x_train_, (-1, 28, 28, 1))  # tf.layers.conv2d takes 4D input
 y_train = np.zeros((y_train_.size, 10))
 y_train[np.arange(y_train_.size), y_train_] = 1
