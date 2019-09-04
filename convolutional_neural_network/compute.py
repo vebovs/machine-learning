@@ -21,19 +21,23 @@ class ConvolutionalNeuralNetworkModel:
         self.x = tf.placeholder(tf.float32, shape=[None, 28, 28, 1])
         self.y = tf.placeholder(tf.float32)
 
+        #double relu maxed at 0.8846
+        #double dropout with 0.9 prob maxed at 0.8723
+        #regular run maxed at 0.8704
+
         conv1 = tf.layers.conv2d(self.x, filters=32, kernel_size=[5, 5], strides=[1, 1], padding='same')
         pool1 = tf.layers.max_pooling2d(conv1, pool_size=[2, 2], strides=[2, 2], padding='same')
 
-        dropped1 = tf.nn.dropout(pool1, 0.2)
+        #dropped1 = tf.nn.dropout(pool1, 0.9)
         #relu1 = tf.nn.relu(pool1)
 
-        conv2 = tf.layers.conv2d(dropped1, filters=64, kernel_size=[5, 5], strides=[1, 1], padding='same')
+        conv2 = tf.layers.conv2d(pool1, filters=64, kernel_size=[5, 5], strides=[1, 1], padding='same')
         pool2 = tf.layers.max_pooling2d(conv2, pool_size=[2, 2], strides=[2, 2], padding='same')
         
-        dropped2 = tf.nn.dropout(pool2, 0.2)
+        #dropped2 = tf.nn.dropout(pool2, 0.9)
         #relu2 = tf.nn.relu(pool2)
 
-        dense = tf.layers.dense(tf.layers.flatten(dropped2), units=1024)
+        dense = tf.layers.dense(tf.layers.flatten(pool2), units=1024)
 
         # Logits
         logits = tf.layers.dense(dense, units=10)
