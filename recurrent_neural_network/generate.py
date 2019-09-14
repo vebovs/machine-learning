@@ -1,7 +1,6 @@
 import numpy as np
 import tensorflow as tf
 
-
 class LongShortTermMemoryModel:
     def __init__(self, encoding_size):
         # Model constants
@@ -34,18 +33,18 @@ class LongShortTermMemoryModel:
 
 
 char_encodings = [
-    [1, 0, 0, 0, 0, 0, 0, 0],  # ' '
-    [0, 1, 0, 0, 0, 0, 0, 0],  # 'h'
-    [0, 0, 1, 0, 0, 0, 0, 0],  # 'e'
-    [0, 0, 0, 1, 0, 0, 0, 0],  # 'l'
-    [0, 0, 0, 0, 1, 0, 0, 0],  # 'o'
-    [0, 0, 0, 0, 0, 1, 0, 0],  # 'w'
-    [0, 0, 0, 0, 0, 0, 1, 0],  # 'r'
-    [0, 0, 0, 0, 0, 0, 0, 1]   # 'd'
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # ' '
+    [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 'h'
+    [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # 'e'
+    [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],  # 'l'
+    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],  # 'o'
+    [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],  # 'w'
+    [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],  # 'r'
+    [0, 0, 0, 0, 0, 0, 0, 1, 0, 0 ,0, 0],  # 'd'
 ]
 encoding_size = np.shape(char_encodings)[1]
 
-index_to_char = [' ', 'h', 'e', 'l', 'o', 'w', 'r', 'd']
+index_to_char = [' ', 'h', 'e', 'l', 'o', 'w', 'r', 'd', 'c', 'a', 't']
 
 x_train = [char_encodings[0], char_encodings[1], char_encodings[2], char_encodings[3], char_encodings[3], char_encodings[4], char_encodings[0], char_encodings[5], char_encodings[4], char_encodings[6], char_encodings[3], char_encodings[7]]  # ' hello world'
 y_train = [char_encodings[1], char_encodings[2], char_encodings[3], char_encodings[3], char_encodings[4], char_encodings[0], char_encodings[5], char_encodings[4], char_encodings[6], char_encodings[3], char_encodings[7], char_encodings[0]]  # 'hello world '
@@ -71,7 +70,7 @@ for epoch in range(500):
         print("epoch", epoch)
         print("loss", session.run(model.loss, {model.batch_size: 1, model.x: [x_train], model.y: [y_train], model.in_state: zero_state}))
 
-        # Generate characters from the initial characters ' h'
+        # Generate characters from the initial characters
         state = session.run(model.in_state, {model.batch_size: 1})
         text = ' h'
         y, state = session.run([model.f, model.out_state], {model.batch_size: 1, model.x: [[char_encodings[0]]], model.in_state: state})  # ' '
