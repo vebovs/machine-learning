@@ -37,20 +37,23 @@ optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.05)
 
 model.compile(loss=tf.keras.losses.categorical_crossentropy, optimizer=optimizer)
 
-def on_epoch_end(epoch, data):
-    if epoch % 10 == 9:
-        print("epoch", epoch)
-        print("loss", data['loss'])
+print('Write a word to be learned and converted into an emoji (enter blank to exit the application)')
+text = input('Word: ')
+while(text):
+    def on_epoch_end(epoch, data):
+        if epoch % 10 == 9:
+            print("epoch", epoch)
+            print("loss", data['loss'])
+            global text
+            for i in range(50):
+                x = np.zeros((1, i + len(text) + 1, encoding_size))
+                for t, char in enumerate(text):
+                    x[0, t, char_to_index[char]] = 1
+                y = model.predict(x)[0][-1]
+                text = categories[y.argmax()]
+            print(emoji.emojize(':' + text + ':'))
 
-        #Test word
-        text = 'rt'
-        for i in range(50):
-            x = np.zeros((1, i + len(text) + 1, encoding_size))
-            for t, char in enumerate(text):
-                x[0, t, char_to_index[char]] = 1
-            y = model.predict(x)[0][-1]
-            text = categories[y.argmax()]
-        print(emoji.emojize(':' + text + ':'))
 
-
-model.fit(x_train, y_train, batch_size=batch_size, epochs=500, verbose=False, callbacks=[tf.keras.callbacks.LambdaCallback(on_epoch_end=on_epoch_end)])
+    model.fit(x_train, y_train, batch_size=batch_size, epochs=100, verbose=False, callbacks=[tf.keras.callbacks.LambdaCallback(on_epoch_end=on_epoch_end)])
+    print('Write a word to be learned and converted into an emoji (enter blank to exit the application)')
+    text = input('Word: ')
